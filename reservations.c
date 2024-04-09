@@ -20,8 +20,15 @@ int reserve_seat(int n)
     //
     // This function should also increment seat_taken_count if the seat
     // wasn't already taken.
-    
-    // TODO
+
+    if(seat_taken[n]==1){
+        return -1;
+    }
+
+    //lock
+    seat_taken[n]=1;
+    seat_taken_count++;
+    //unlock
 
     return 0;  // Change as necessary--included so it will build
 }
@@ -36,17 +43,22 @@ int free_seat(int n)
     // This function should also decrement seat_taken_count if the seat
     // wasn't already free.
 
-    // TODO
+    if(seat_taken[n]==0){
+        return -1;
+    }
 
+    //lock
+    seat_taken[n]=0;
+    seat_taken_count--;
+    //unlock
     return 0;  // Change as necessary--included so it will build
 }
 
 int is_free(int n) {
     // Returns true if the given seat is available.
 
-    // TODO
-
-    return 0;  // Change as necessary--included so it will build
+    //lock?
+    return seat_taken[n]==0;  // Change as necessary--included so it will build
 }
 
 int verify_seat_count(void) {
