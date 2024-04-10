@@ -51,10 +51,8 @@ int free_seat(int n)
 
 int is_free(int n) {
     // Returns true if the given seat is available.
-
-    //lock?
-    
-    return seat_taken[n]==0;  // Change as necessary--included so it will build
+    pthread_mutex_lock(&lock);
+    return (seat_taken[n]==0)+pthread_mutex_unlock(&lock);  // Change as necessary--included so it will build
 }
 
 int verify_seat_count(void) {
